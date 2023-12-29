@@ -4,7 +4,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-project_name = "nlpproject"
+project_name = "mlproject"
 
 list_of_files = [
     ".github/workflows/.gitkeep",
@@ -22,6 +22,9 @@ list_of_files = [
     f"src/{project_name}/utils.py",
     "app.py",
     "Dockerfile",
+    f"notebook/modeltraining.ipynb",
+    f"notebook/eda.ipynb",
+
 ]
 for filepath in list_of_files:
     filepath = Path(filepath) ##extracts the file path of the data
