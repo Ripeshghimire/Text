@@ -1,5 +1,5 @@
 import sys
-from src.nlpproject.logger import logging
+from src.mlproject.logger import logging
 
 
 def error_message_detail(error,error_detail:sys):
