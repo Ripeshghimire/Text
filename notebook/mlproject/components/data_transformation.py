@@ -56,15 +56,15 @@ class DataTransformation:
             logging.info("Reading the train and test file")
             processing = self.get_data_transformer_object()
             target_Column = "label"
-            dropping_columns = ["id","author","text"]
+            dropping_columns = ["id","author","text",'label']
             title_column = "title"
             train_df['title'] = train_df["title"].apply(self.preprocess_text)
             test_df['title'] = test_df["title"].apply(self.preprocess_text)
             #dividing the train datset to independent and dependent features
-            input_features_train_df = train_df.drop([target_Column] + dropping_columns, axis=1)
+            input_features_train_df = train_df.drop (dropping_columns, axis=1)
             target_feature_train_df  = train_df[target_Column]
-              #dividing the test datset to independent and dependent features
-            input_features_test_df = test_df.drop([target_Column] + dropping_columns, axis=1)
+            #dividing the test datset to independent and dependent features
+            input_features_test_df = test_df.drop(dropping_columns, axis=1)
             target_feature_test_df  = test_df[target_Column]
             logging.info("Applying Preprocessing on training and test dataframe")
 
@@ -74,12 +74,17 @@ class DataTransformation:
              
 
              #combining the data for traiin
+            print(input_feature_train_arr.shape)
+            print(target_feature_train_df.shape) 
+            print(input_feature_test_arr) 
+            print(target_feature_test_df) 
             train_arr = np.c_[
-                input_feature_train_arr,np.array(target_feature_train_df)
+            input_feature_train_arr, np.array(target_feature_train_df).reshape(-1, 14560)
             ]
+
             #combining the data for test
             test_arr = np.c_[
-                input_feature_test_arr,np.array(target_feature_test_df)
+                input_feature_test_arr,np.array(target_feature_test_df).reshape(-1,6240)
             ]
             logging.info(f"Saved Preprocessing object")
             save_object( ### dumping the pickle file using the save object function defined in utils.py
